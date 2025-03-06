@@ -2,7 +2,6 @@
 
 My personal website built with Next.js and Tailwind CSS. Uses Medium as a headless CMS for blog posts and Raindrop.io for managing bookmarks.
 
-<img src="public/og-image.png" width="900" />
 
 ## Features
 
@@ -30,7 +29,7 @@ My personal website built with Next.js and Tailwind CSS. Uses Medium as a headle
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/osman-koc/my-web-site.git
+git clone https://github.com/ufukguzek/my-web-site.git
 ```
 
 2. Install dependencies:
