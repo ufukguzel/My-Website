@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { FallbackImage } from "@/components/ui/fallback-image";
@@ -26,11 +26,15 @@ export function BookmarksList() {
     { revalidateOnFocus: false }
   );
 
-  const [selectedCollection, setSelectedCollection] = useState<Collection | null>(
-    collections.find(c => c._id === DEFAULT_COLLECTION_ID) || collections[0] || null
-  );
+  const [selectedCollection, setSelectedCollection] = useState<Collection | null>(null);
 
-  const { data: bookmarks = [], isLoading: isLoadingBookmarks } = useSWR<Bookmark[]>(
+  useEffect(() => {
+    if (collections.length) {
+      setSelectedCollection(collections.find(c => c._id === DEFAULT_COLLECTION_ID) || collections[0]);
+    }
+  }, [collections]);
+
+  const { data: bookmarks = [], error: bookmarksError, isLoading: isLoadingBookmarks } = useSWR<Bookmark[]>(
     selectedCollection ? `/api/bookmarks/items/${selectedCollection._id}` : null,
     fetcher,
     { revalidateOnFocus: false }
@@ -40,6 +44,14 @@ export function BookmarksList() {
     return (
       <div className="text-center py-12 text-muted-foreground">
         Failed to load collections. Please try again later.
+      </div>
+    );
+  }
+
+  if (bookmarksError) {
+    return (
+      <div className="text-center py-12 text-muted-foreground">
+        Failed to load bookmarks. Please try again later.
       </div>
     );
   }
@@ -55,26 +67,7 @@ export function BookmarksList() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
       {/* Categories Sidebar */}
-      <div className="md:col-span-3 space-y-2">
-        {collections.map((collection) => (
-          <button
-            key={collection._id}
-            onClick={() => setSelectedCollection(collection)}
-            className={cn(
-              "w-full text-left px-4 py-3 rounded-lg transition-colors",
-              "hover:bg-accent hover:text-accent-foreground",
-              selectedCollection?._id === collection._id
-                ? "bg-accent text-accent-foreground"
-                : "text-muted-foreground"
-            )}
-          >
-            <div className="flex justify-between items-center">
-              <span>{collection.title}</span>
-              <span className="text-sm">{collection.count}</span>
-            </div>
-          </button>
-        ))}
-      </div>
+      
 
       {/* Bookmarks Grid */}
       <div className="md:col-span-9">
@@ -82,7 +75,7 @@ export function BookmarksList() {
           {selectedCollection && (
             <h2 className="text-2xl font-semibold">{selectedCollection.title}</h2>
           )}
-          
+
           {isLoadingBookmarks ? (
             <div className="grid gap-6 sm:grid-cols-1 lg:grid-cols-2">
               {Array.from({ length: 6 }).map((_, index) => (
