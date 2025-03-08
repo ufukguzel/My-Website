@@ -30,7 +30,7 @@ My personal website built with Next.js and Tailwind CSS. Uses Medium as a headle
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/osman-koc/my-web-site.git
+git clone https://github.com/ufukguzel/my-web-site.git
 ```
 
 2. Install dependencies:
