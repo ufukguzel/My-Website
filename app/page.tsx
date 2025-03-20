@@ -2,6 +2,7 @@ import { MediumPosts } from '@/components/medium-posts';
 import { FeaturedProjects } from '@/components/featured-projects';
 import { getMediumPosts } from '@/lib/medium';
 import { GetMetada } from '@/lib/page-metadata';
+import PlayAIEmbed from "@/components/playai-embed";
 
 export const metadata = GetMetada('home');
 
@@ -17,6 +18,12 @@ export default async function Home() {
         <p className="text-lg text-muted-foreground leading-relaxed">
         A technology enthusiast and software developer based in Türkiye, dedicated to building scalable applications and delving into web development, and emerging technologies. Passionate about AI, data science, and game development, always seeking innovative solutions to enhance digital experiences.
         </p>
+      </section>
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold tracking-tight">Let's chat with PlayAI</h2>
+        <div className="flex justify-center">
+          <PlayAIEmbed /> {/* PlayAIEmbed bileşenini sayfada kullanıyoruz */}
+        </div>
       </section>
 
       <section className="space-y-6">

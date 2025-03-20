@@ -1,8 +1,27 @@
-const _title = 'Ufuk Güzel - Software Developer, | Portfolio & Blog';
+const _title = 'Ufuk Güzel - Yazılım Geliştirici | Kişisel Web Sitesi';
 const _titleShort = 'Ufuk Güzel';
-const _subTitle = 'Software Developer';
-const _description = 'I develop web-based applications professionally. I also develop mobile applications and open source software for hobby purposes. You can review what is published on GitHub, Google Play Store and AppStore.';
-const _keywords = ['Ufuk GÜZEL', 'Ufuk Güzel', 'ufukkguzel', 'ufukguzel', 'guzelufuk', 'ufukguzel58', 'dev', 'developer', 'ufukguzel15', 'blog', 'mask'];
+const _subTitle = 'Yazılım Geliştirici';
+const _description = 'Ufuk Güzel - Profesyonel web uygulamaları geliştiriyorum. Ayrıca mobil uygulamalar ve açık kaynak yazılımlar geliştiriyorum. GitHub, Google Play Store ve AppStore\'da yayınlanan projelerimi inceleyebilirsiniz.';
+const _keywords = [
+  'Ufuk Güzel',
+  'Ufuk GÜZEL',
+  'ufukkguzel',
+  'ufukguzel',
+  'guzelufuk',
+  'ufukguzel58',
+  'yazılım geliştirici',
+  'web developer',
+  'mobil uygulama geliştirici',
+  'software developer',
+  'frontend developer',
+  'react developer',
+  'next.js developer',
+  'türk yazılımcı',
+  'türk developer',
+  'ufukguzel15',
+  'blog',
+  'mask'
+];
 const _email = 'me@kocosman.com.tr';
 //const _ogImgPath = '/og-image.png';
 
@@ -23,9 +42,40 @@ const _urls = {
 export const sharedMetadata = {
   title: _title,
   titleShort: _titleShort,
-  subTitle: _subTitle,
   description: _description,
   keywords: _keywords,
+  authors: [
+    {
+      name: _titleShort,
+      url: _urls.website,
+    }
+  ],
+  creator: _titleShort,
+  publisher: _titleShort,
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL(_urls.website),
+  alternates: {
+    canonical: '/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: 'wYTeRYwHS6QvhUtILNHaNgeAr6jTRh77g2vre6ZYST0',
+  },
+  subTitle: _subTitle,
   email: _email,
   urls: _urls,
   social: _socialAccounts,
@@ -33,28 +83,29 @@ export const sharedMetadata = {
     width: 1200,
     height: 630,
     type: 'image/png'
-  }
-  // openGraph: {
-  //   title: _title,
-  //   description: _description,
-  //   url: _urls.website,
-  //   siteName: _title,
-  //   images: [
-  //     {
-  //       url: _ogImgPath,
-  //       width: 1200,
-  //       height: 630,
-  //       alt: _title,
-  //       type: 'image/png',
-  //     },
-  //   ],
-  //   locale: 'en_US',
-  //   type: 'website',
-  // },
-  // twitter: {
-  //   card: 'summary_large_image',
-  //   title: _title,
-  //   description: _description,
-  //   images: [_ogImgPath],
-  // },
+  },
+  openGraph: {
+    title: _title,
+    description: _description,
+    url: _urls.website,
+    siteName: _title,
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: _title,
+        type: 'image/png',
+      },
+    ],
+    locale: 'tr_TR',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: _title,
+    description: _description,
+    creator: `@${_socialAccounts.x}`,
+    images: ['/og-image.png'],
+  },
 };

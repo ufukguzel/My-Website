@@ -8,7 +8,7 @@ import { LoadingProvider } from '@/components/loading-provider';
 import { OkAsciiArt } from '@/components/ok-ascii-art';
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import PlayAIEmbed from '@/components/playai-embed';  // PlayAIEmbed bileşenini içe aktarıyoruz
+import { PlayAIWidget } from '@/components/playai-widget';
 import { GetMetada } from '@/lib/page-metadata';
 
 export const metadata = GetMetada('default');
@@ -54,12 +54,10 @@ export default function RootLayout({
               </div>
             </div>
           </div>
+          <PlayAIWidget />
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />
-        
-        {/* PlayAIEmbed Bileşenini Sayfada Görüntüle */}
-        <PlayAIEmbed />
       </body>
     </html>
   );
