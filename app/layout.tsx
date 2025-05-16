@@ -10,6 +10,8 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { PlayAIWidget } from '@/components/playai-widget';
 import { GetMetada } from '@/lib/page-metadata';
+import { DefaultSeo } from 'next-seo';
+import SEO from '../next-seo.config';
 
 export const metadata = GetMetada('default');
 
@@ -29,7 +31,30 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="tr" suppressHydrationWarning>
+      <head>
+        <DefaultSeo {...SEO} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Ufuk Güzel",
+              "url": "https://ufukguzel.com.tr",
+              "sameAs": [
+                "https://www.linkedin.com/in/ufukguzel/",
+                "https://github.com/ufukguzel"
+              ],
+              "jobTitle": "Yazılım Geliştirici",
+              "worksFor": {
+                "@type": "Organization",
+                "name": "Dikont"
+              }
+            })
+          }}
+        />
+      </head>
       <body className={`${inter.variable} ${jetBrainsMono.variable} font-sans`}>
         <ThemeProvider
           attribute="class"

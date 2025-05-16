@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://ufukguzel.com/sitemap.xml 
+Sitemap: https://ufukguzel.com.tr/sitemap.xml 
