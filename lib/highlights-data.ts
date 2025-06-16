@@ -4,6 +4,16 @@ const imageFolderPath = '/images/highlights';
 
 export const HighlightList: Highlight[] = [
     {
+        year: "2025",
+        events: [
+            {
+                title: "Dikont - Software Developer",
+                description: "Currently working as a software developer at Dikont, building a digital document editor and e-signature platform using React, Strapi (Node.js), and PostgreSQL. Responsible for developing drag-and-drop form elements, advanced PDF processing, and integrating OpenAI-powered features.",
+                imageUrl: "/images/highlights/2025_dikont.jpg"
+            }
+        ]
+    },
+    {
         year: "2024",
         events: [
             {
