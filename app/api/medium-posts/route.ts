@@ -1,33 +1,30 @@
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 export async function GET() {
   try {
-    const username = 'ufukkguzel'; // Medium kullanıcı adınız
-    const response = await fetch(`https://api.medium.com/v1/users/${username}/posts`, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-    });
-
+    // Medium resmi API kısıtlı; RSS üzerinden güvenli fallback
+    const rssUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@ufukguzel15';
+    const response = await fetch(rssUrl, { next: { revalidate: 3600 } });
     if (!response.ok) {
-      throw new Error('Medium API yanıt vermedi');
+      return NextResponse.json([]);
     }
-
     const data = await response.json();
-    
-    // Son 5 yazıyı al
-    const posts = data.data.slice(0, 5).map((post: any) => ({
-      title: post.title,
-      description: post.description,
-      url: post.url,
-      publishedAt: post.publishedAt,
-      thumbnail: post.thumbnail,
+    if (data.status !== 'ok' || !data.items) {
+      return NextResponse.json([]);
+    }
+    const posts = data.items.slice(0, 5).map((item: any) => ({
+      title: item.title,
+      description: item.description?.replace(/<[^>]*>/g, '').slice(0, 160) + '...',
+      url: item.link,
+      publishedAt: item.pubDate,
+      thumbnail: item.thumbnail || null,
     }));
-
     return NextResponse.json(posts);
   } catch (error) {
     console.error('Medium API Hatası:', error);
-    return NextResponse.json({ error: 'Medium yazıları alınamadı' }, { status: 500 });
+    return NextResponse.json([]);
   }
 } 
