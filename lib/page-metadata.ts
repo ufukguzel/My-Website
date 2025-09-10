@@ -53,6 +53,16 @@ export const PageMetadataList: Record<string, PageMetadata> = {
             height: 630,
         }
     },
+    mobileApps: {
+        route: "/mobile-apps",
+        title: "Mobile Apps",
+        description: "A selection of mobile applications I have published.",
+        image: {
+            url: '/api/og?page=mobile-apps',
+            width: 1200,
+            height: 630,
+        }
+    },
     workspace: {
         route: "/workspace",
         title: "Workspace",

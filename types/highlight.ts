@@ -7,4 +7,5 @@ export type HighlightItem = {
     title: string;
     description?: string;
     imageUrl?: string;
+    href?: string;
 }

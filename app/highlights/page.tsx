@@ -41,7 +41,13 @@ export default function HighlightPage() {
 
                   <div className="group">
                     <h3 className="text-lg font-medium mb-3 group-hover:text-primary transition-colors">
-                      {event.title}
+                      {event.href ? (
+                        <a href={event.href} target="_blank" rel="noopener noreferrer" className="underline-offset-4 hover:underline">
+                          {event.title}
+                        </a>
+                      ) : (
+                        event.title
+                      )}
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
                       {event.description}

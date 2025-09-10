@@ -18,6 +18,7 @@ import {
   Menu,
   X,
   Code2,
+  Smartphone,
   type LucideIcon,
 } from "lucide-react";
 
@@ -32,6 +33,7 @@ const mainLinks = [
   { href: "/blog", icon: PenTool, label: "Writing" },
   { href: "/highlights", icon: Map, label: "Highlights" },
   { href: "/projects", icon: Code2, label: "Projects" },
+  { href: "/mobile-apps", icon: Smartphone, label: "Mobile Apps" },
   { href: "/tools", icon: Layers, label: "Tools" },
   { href: "/workspace", icon: Briefcase, label: "Workspace" },
   { href: "/bookmarks", icon: Bookmark, label: "Bookmarks" },

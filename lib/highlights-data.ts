@@ -7,10 +7,22 @@ export const HighlightList: Highlight[] = [
         year: "2025",
         events: [
             {
+                title: "Valde - Software Developer",
+                description: "Started working at Valde as a Software Developer.",
+               // imageUrl: "/images/highlights/2025_valde.jpg",
+                href: "https://valde.com.tr/"
+            }
+        ]
+    },
+    {
+        year: "2025",
+        events: [
+            {
                 title: "Dikont - Software Developer",
                 description: "Currently working as a software developer at Dikont, building a digital document editor and e-signature platform using React, Strapi (Node.js), and PostgreSQL. Responsible for developing drag-and-drop form elements, advanced PDF processing, and integrating OpenAI-powered features.",
-                imageUrl: "/images/highlights/2025_dikont.jpg"
-            }
+                imageUrl: "/images/highlights/2025_dikont.jpg",
+                href: "https://dikont.com/"
+            },
         ]
     },
     {
@@ -19,7 +31,8 @@ export const HighlightList: Highlight[] = [
             {
                 title: "Turkcell - Intern / Information & Communication Technologies",
                 description: "Within the scope of Turkcell Gncytnk program, I did an internship in the ICT department. I contributed to process planning, development and monitoring. I developed the task management system using ASP.NET MVC and Entity Framework",
-                imageUrl: "/images/highlights/2024_turkcell.jpg"
+                imageUrl: "/images/highlights/2024_turkcell.jpg",
+                href: "https://www.turkcell.com.tr/"
             }
         ]
     },
@@ -29,7 +42,8 @@ export const HighlightList: Highlight[] = [
             {
                 title: "İstanbul Medipol Üniversitesi - Intern / Web Development",
                 description: "I worked as an intern for the university's web development team. I contributed to the update and development of the university's website. I have developed projects using both Frontend and Backend technologies.",
-                imageUrl: "/images/highlights/2023_medipol_web_dev.jpg"
+                imageUrl: "/images/highlights/2023_medipol_web_dev.jpg",
+                href: "https://medipol.edu.tr/"
             },
         ]
     },
