@@ -2,8 +2,8 @@
   "name": "my-web-site",
   "description": "My personal website",
   "author": {
-    "name": "Osman Koç",
-    "url": "https://osmankoc.dev"
+    "name": "Ufuk Güzel",
+    "url": "https://ufukguzel.com.tr/"
   },
   "version": "0.3.4",
   "private": true,

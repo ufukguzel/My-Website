@@ -7,11 +7,12 @@ export const PageMetadataList: Record<string, PageMetadata> = {
         route: "/",
         title: sharedMetadata.title,
         description: "A technology enthusiast and software developer based in Türkiye, dedicated to building scalable applications and delving into web development, and emerging technologies. Passionate about AI, data science, and game development, always seeking innovative solutions to enhance digital experiences.",
-        image: {
-            url: '/api/og?page=home',
-            width: 1200,
-            height: 630,
-        }
+            image: {
+                url: '/api/og?page=home',
+                width: 1200,
+                height: 630,
+            }
+        
     },
     blog: {
         route: "/blog",

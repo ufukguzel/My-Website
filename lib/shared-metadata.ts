@@ -7,6 +7,7 @@ const _keywords = [
   'Ufuk GÜZEL',
   'ufukkguzel',
   'ufukguzel',
+  'ufukkguzel',
   'guzelufuk',
   'ufukguzel58',
   'yazılım geliştirici',
@@ -22,7 +23,7 @@ const _keywords = [
   'blog',
   'mask'
 ];
-const _email = 'me@kocosman.com.tr';
+const _email = 'me@ufukguzel.com.tr';
 //const _ogImgPath = '/og-image.png';
 
 const _socialAccounts = {
