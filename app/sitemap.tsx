@@ -39,7 +39,7 @@ function walkDirectory(dir: string, basePath: string = ''): string[] {
 
     for (const file of list) {
         if (file.isDirectory()) {
-            if (file.name.startsWith('(') || file.name === 'api') continue // Route gruplarını ve API rotalarını atla
+            if (file.name.startsWith('(') || file.name === 'api') continue // Skip route groups and API routes
             results = results.concat(walkDirectory(join(dir, file.name), `${basePath}/${file.name}`))
         } else if (file.name === 'page.tsx' || file.name === 'page.js') {
             const route = basePath || '/'

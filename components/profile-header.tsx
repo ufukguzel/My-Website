@@ -23,7 +23,7 @@ export function ProfileHeader() {
       </div>
       
       <p className="text-lg leading-relaxed">
-        Hi 👋 I'm Ufuk, A technology enthusiast and software developer based in Türkiye, dedicated to building scalable applications and delving into web development, and emerging technologies. Passionate about AI, data science, and game development, always seeking innovative solutions to enhance digital experiences.
+        Hi 👋 I'm Ufuk, a technology enthusiast and software developer based in Turkey, dedicated to building scalable applications and exploring web development and emerging technologies. I'm passionate about AI, data science, and game development, always seeking innovative solutions to elevate digital experiences.
       </p>
     </section>
   );

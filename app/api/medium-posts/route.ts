@@ -1,30 +1,25 @@
 import { NextResponse } from 'next/server';
-
-export const dynamic = 'force-dynamic';
-export const runtime = 'nodejs';
+import { getMediumPosts } from '@/lib/medium';
 
 export async function GET() {
   try {
-    // Medium resmi API kısıtlı; RSS üzerinden güvenli fallback
-    const rssUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@ufukguzel15';
-    const response = await fetch(rssUrl, { next: { revalidate: 3600 } });
-    if (!response.ok) {
-      return NextResponse.json([]);
-    }
-    const data = await response.json();
-    if (data.status !== 'ok' || !data.items) {
-      return NextResponse.json([]);
-    }
-    const posts = data.items.slice(0, 5).map((item: any) => ({
-      title: item.title,
-      description: item.description?.replace(/<[^>]*>/g, '').slice(0, 160) + '...',
-      url: item.link,
-      publishedAt: item.pubDate,
-      thumbnail: item.thumbnail || null,
+    const { posts } = await getMediumPosts(5);
+
+    const formattedPosts = posts.map((post) => ({
+      title: post.title,
+      description: post.contentSnippet,
+      url: post.link,
+      publishedAt: post.pubDate,
+      thumbnail: post.thumbnail,
     }));
-    return NextResponse.json(posts);
+
+    return NextResponse.json(formattedPosts, {
+      headers: {
+        'Cache-Control': 'no-store',
+      },
+    });
   } catch (error) {
-    console.error('Medium API Hatası:', error);
-    return NextResponse.json([]);
+    console.error('Medium API error:', error);
+    return NextResponse.json({ error: 'Failed to fetch Medium posts' }, { status: 500 });
   }
-} 
+}

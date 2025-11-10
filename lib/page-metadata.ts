@@ -6,7 +6,7 @@ export const PageMetadataList: Record<string, PageMetadata> = {
     home: {
         route: "/",
         title: sharedMetadata.title,
-        description: "A technology enthusiast and software developer based in Türkiye, dedicated to building scalable applications and delving into web development, and emerging technologies. Passionate about AI, data science, and game development, always seeking innovative solutions to enhance digital experiences.",
+        description: "A technology enthusiast and software developer based in Turkey, dedicated to building scalable applications and exploring web development and emerging technologies. Passionate about AI, data science, and game development, always seeking innovative ways to enhance digital experiences.",
             image: {
                 url: '/api/og?page=home',
                 width: 1200,
@@ -99,8 +99,10 @@ export const DefaultPageMetadata: PageMetadata = {
 
 export function GetMetada(route: string) {
     const meta = PageMetadataList[route] || DefaultPageMetadata;
-    var keywords = sharedMetadata.keywords;
-    keywords.push(route);
+    const keywords = [...sharedMetadata.keywords];
+    if (!keywords.includes(route)) {
+        keywords.push(route);
+    }
 
     const subfix = meta.route != DefaultPageMetadata.route ? `— ${sharedMetadata.titleShort}` : '';
 

@@ -1,24 +1,20 @@
-const _title = 'Ufuk Güzel - Yazılım Geliştirici | Kişisel Web Sitesi';
+const _title = 'Ufuk Güzel - Software Developer | Personal Website';
 const _titleShort = 'Ufuk Güzel';
-const _subTitle = 'Yazılım Geliştirici';
-const _description = 'Ufuk Güzel - Profesyonel web uygulamaları geliştiriyorum. Ayrıca mobil uygulamalar ve açık kaynak yazılımlar geliştiriyorum. GitHub, Google Play Store ve AppStore\'da yayınlanan projelerimi inceleyebilirsiniz.';
+const _subTitle = 'Software Developer';
+const _description = 'I build professional web applications, alongside mobile apps and open-source tools. Explore my published projects on GitHub, Google Play, and the App Store.';
 const _keywords = [
   'Ufuk Güzel',
-  'Ufuk GÜZEL',
   'ufukkguzel',
   'ufukguzel',
-  'ufukkguzel',
-  'guzelufuk',
   'ufukguzel58',
-  'yazılım geliştirici',
-  'web developer',
-  'mobil uygulama geliştirici',
   'software developer',
+  'web developer',
+  'mobile developer',
+  'ai specialist',
   'frontend developer',
   'react developer',
   'next.js developer',
-  'türk yazılımcı',
-  'türk developer',
+  'turkish developer',
   'ufukguzel15',
   'blog',
   'mask'

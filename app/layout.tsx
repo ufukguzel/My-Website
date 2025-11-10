@@ -10,6 +10,9 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { PlayAIWidget } from '@/components/playai-widget';
 import { GetMetada } from '@/lib/page-metadata';
+import { MouseGradientBackground } from '@/components/mouse-gradient-background';
+import { LanguageProvider } from '@/components/language-provider';
+import { LanguageSelect } from '@/components/language-select';
 // Removed next-seo usage; App Router metadata API is used instead
 
 export const metadata = GetMetada('default');
@@ -44,10 +47,10 @@ export default function RootLayout({
                 "https://www.linkedin.com/in/ufukguzel/",
                 "https://github.com/ufukguzel"
               ],
-              "jobTitle": "Yazılım Geliştirici",
+              "jobTitle": "Software Developer",
               "worksFor": {
                 "@type": "Organization",
-                "name": "Dikont"
+                "name": "Valde"
               }
             })
           }}
@@ -60,7 +63,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <LanguageProvider>
           <OkAsciiArt />
+          <Suspense>
+            <MouseGradientBackground />
+          </Suspense>
           <Suspense>
             <LoadingProvider />
           </Suspense>
@@ -70,7 +77,8 @@ export default function RootLayout({
             </Suspense>
             <div className="flex-1 pl-0 md:pl-64">
               <div className="max-w-6xl mx-auto px-4 md:px-8 py-8">
-                <div className="flex justify-end mb-16">
+                <div className="flex items-center justify-end gap-3 mb-16">
+                  <LanguageSelect />
                   <ThemeToggle />
                 </div>
                 <main>{children}</main>
@@ -78,6 +86,7 @@ export default function RootLayout({
             </div>
           </div>
           <PlayAIWidget />
+          </LanguageProvider>
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />

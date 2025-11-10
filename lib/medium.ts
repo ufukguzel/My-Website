@@ -4,7 +4,13 @@ import he from 'he';
 export async function getMediumPosts(limit = 10, page = 1) {
   try {
     const response = await fetch(
-      'https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@ufukguzel15'
+      'https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@ufukguzel15',
+      {
+        cache: 'no-store',
+        headers: {
+          'Accept': 'application/json',
+        },
+      }
     );
 
     const data = await response.json();

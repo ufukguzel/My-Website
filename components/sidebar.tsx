@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { 
   Home, 
@@ -49,14 +49,35 @@ export function Sidebar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.setProperty("overflow", "hidden");
+      document.body.style.setProperty("touch-action", "none");
+    } else {
+      document.body.style.removeProperty("overflow");
+      document.body.style.removeProperty("touch-action");
+    }
+
+    return () => {
+      document.body.style.removeProperty("overflow");
+      document.body.style.removeProperty("touch-action");
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
   return (
     <>
       {/* Mobile Menu Button */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => setIsOpen((prev) => !prev)}
+        aria-expanded={isOpen}
+        aria-controls="primary-navigation"
         className={cn(
-          "md:hidden fixed top-4 z-50 p-2 bg-background border rounded-md",
-          isOpen ? "left-52" : "left-4"
+          "md:hidden fixed left-4 top-4 z-50 inline-flex items-center justify-center rounded-full border border-border/60 bg-background/80 px-3 py-3 text-foreground shadow-lg backdrop-blur transition-all duration-300",
+          isOpen && "translate-x-48 bg-primary text-primary-foreground"
         )}
       >
         {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -64,10 +85,10 @@ export function Sidebar() {
 
       {/* Sidebar */}
       <aside className={cn(
-        "fixed left-0 top-0 h-screen w-64 border-r bg-background p-6 transition-transform duration-200 ease-in-out z-40",
+        "fixed left-0 top-0 z-40 h-screen w-64 border-r border-border/70 bg-background/95 p-6 shadow-xl backdrop-blur-lg transition-transform duration-300 ease-out",
         isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
       )}>
-        <div className="flex h-full flex-col justify-between">
+        <div className="flex h-full flex-col justify-between" id="primary-navigation">
           <div className="space-y-8">
             <Link href="/" className="block" onClick={() => setIsOpen(false)}>
               <div className="space-y-3">
@@ -105,7 +126,7 @@ export function Sidebar() {
           </div>
 
           {/* Social Links */}
-          <div className="flex items-center space-x-4 fixed bottom-8 left-0 w-full p-4 justify-around z-10 md:static md:flex-none">
+          <div className="flex items-center justify-around gap-4 rounded-2xl border border-border/60 bg-background/80 p-4 text-muted-foreground transition md:border-none md:bg-transparent md:p-0">
             {socialLinks.map(({ href, icon: Icon, label }) => (
               <a
                 key={href}
@@ -123,12 +144,14 @@ export function Sidebar() {
       </aside>
 
       {/* Overlay */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-background/80 backdrop-blur-sm z-30 md:hidden"
-          onClick={() => setIsOpen(false)}
-        />
-      )}
+      <div
+        className={cn(
+          "fixed inset-0 z-30 bg-background/60 backdrop-blur-sm opacity-0 transition-opacity duration-300 md:hidden",
+          isOpen && "pointer-events-auto opacity-100",
+          !isOpen && "pointer-events-none"
+        )}
+        onClick={() => setIsOpen(false)}
+      />
     </>
   );
 }

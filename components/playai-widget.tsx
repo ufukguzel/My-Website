@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 
-// PlayAI window tipini tanımla
+// Define the PlayAI window type
 declare global {
   interface Window {
     PlayAI?: {
@@ -13,18 +13,18 @@ declare global {
 
 export const PlayAIWidget = () => {
   useEffect(() => {
-    // Script zaten yüklü mü kontrol et
+    // Check if the script is already loaded
     if (document.querySelector('script[src="https://cdn.playai.com/widget.js"]')) {
       return;
     }
 
-    // Script elementini oluştur
+    // Create the script element
     const script = document.createElement('script');
     script.src = 'https://cdn.playai.com/widget.js';
     script.async = true;
     script.defer = true;
     
-    // Script yüklendiğinde widget'ı başlat
+    // Initialize the widget once the script has loaded
     script.onload = () => {
       if (window.PlayAI) {
         window.PlayAI.init();
