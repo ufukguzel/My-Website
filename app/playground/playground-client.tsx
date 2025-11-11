@@ -2,8 +2,79 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Code2, Eye } from "lucide-react";
+import { useLanguage } from "@/components/language-provider";
+
+const translations = {
+  en: {
+    title: "Code Playground",
+    description: "Write HTML, CSS and JS to see live preview. Use templates to start quickly.",
+    buttons: {
+      todo: "Todo App",
+      counter: "Counter",
+      color: "Color Picker",
+      markdown: "Markdown",
+    },
+    editors: { html: "HTML", css: "CSS", js: "JS" },
+    livePreview: "Live Preview",
+    guideTitle: "Suggested mini project: Todo App",
+    guideSteps: [
+      "Add a form and a list into HTML (you can use the template).",
+      "On submit, append input value to the list and clear the field.",
+      "Add complete and delete actions for each item.",
+      "Use capsule buttons and smooth borders with CSS.",
+      "Optional: persist list with localStorage.",
+    ],
+    templates: {
+      todoTitle: "Todo App",
+      addPlaceholder: "Add a task...",
+      add: "Add",
+      colorTitle: "Color Picker",
+      code: "Code",
+      counterTitle: "Counter",
+      markdownTitle: "Markdown Previewer",
+      markdownPlaceholder: "# Heading\n\n- item 1\n- item 2",
+      welcomeMd:
+        "# Welcome\n\n- try\n- edit\n\n**bold** and *italic* are supported.",
+    },
+  },
+  tr: {
+    title: "Kod Oyun Alanı",
+    description:
+      "HTML, CSS ve JS yazarak canlı önizleme alın. Hızlı başlamak için şablonları kullanın.",
+    buttons: {
+      todo: "Todo Uygulaması",
+      counter: "Sayaç",
+      color: "Renk Seçici",
+      markdown: "Markdown",
+    },
+    editors: { html: "HTML", css: "CSS", js: "JS" },
+    livePreview: "Canlı Önizleme",
+    guideTitle: "Önerilen mini proje: Todo Uygulaması",
+    guideSteps: [
+      "HTML’e bir form ve liste ekleyin (hazır şablonu kullanabilirsiniz).",
+      "Form gönderiminde girdiyi listeye ekleyin ve alanı temizleyin.",
+      "Her öğeye “tamamlandı” ve “sil” eylemleri ekleyin.",
+      "CSS ile kapsül butonlar ve yumuşak kenarlıklar kullanın.",
+      "İsteğe bağlı: localStorage ile listeyi kalıcı hale getirin.",
+    ],
+    templates: {
+      todoTitle: "Todo Uygulaması",
+      addPlaceholder: "Bir görev ekleyin...",
+      add: "Ekle",
+      colorTitle: "Renk Seçici",
+      code: "Kod",
+      counterTitle: "Sayaç",
+      markdownTitle: "Markdown Önizleyici",
+      markdownPlaceholder: "# Başlık\n\n- madde 1\n- madde 2",
+      welcomeMd:
+        "# Hoş geldin\n\n- dene\n- düzenle\n\n**kalın** ve *italik* desteklenir.",
+    },
+  },
+} as const;
 
 export default function PlaygroundClient() {
+  const { language } = useLanguage();
+  const t = translations[language];
   const [html, setHtml] = useState<string>(`<div class="card">
   <h1>Hello, Playground!</h1>
   <p>Edit HTML/CSS/JS and see the live preview.</p>
@@ -63,10 +134,10 @@ p { margin: 0; opacity: .85; }`);
   function loadTodoTemplate() {
     setActiveTemplate('todo');
     setHtml(`<main class="app">
-  <h1>Todo App</h1>
+  <h1>${t.templates.todoTitle}</h1>
   <form id="todo-form">
-    <input id="todo-input" type="text" placeholder="Add a task..." aria-label="Add a task" />
-    <button type="submit">Add</button>
+    <input id="todo-input" type="text" placeholder="${t.templates.addPlaceholder}" aria-label="${t.templates.addPlaceholder}" />
+    <button type="submit">${t.templates.add}</button>
   </form>
   <ul id="todo-list" aria-live="polite"></ul>
 </main>`);
@@ -146,7 +217,7 @@ render();`);
   function loadCounterTemplate() {
     setActiveTemplate('counter');
     setHtml(`<div class="card">
-  <h1>Counter</h1>
+  <h1>${t.templates.counterTitle}</h1>
   <div class="row">
     <button id="dec">-</button>
     <span id="count">0</span>
@@ -171,10 +242,10 @@ document.getElementById('dec').addEventListener('click', () => {
   function loadColorPickerTemplate() {
     setActiveTemplate('color');
     setHtml(`<main class="app">
-  <h1>Renk Seçici</h1>
+  <h1>${t.templates.colorTitle}</h1>
   <input id="picker" type="color" value="#3b82f6" />
   <div class="preview" id="preview"></div>
-  <p>Kod: <code id="code">#3b82f6</code></p>
+  <p>${t.templates.code}: <code id="code">#3b82f6</code></p>
 </main>`);
     setCss(`:root { color-scheme: light dark; }
 body { margin: 0; font-family: ui-sans-serif, system-ui; padding: 16px; }
@@ -192,9 +263,9 @@ update(picker.value);`);
   function loadMarkdownTemplate() {
     setActiveTemplate('markdown');
     setHtml(`<main class="app">
-  <h1>Markdown Önizleyici</h1>
+  <h1>${t.templates.markdownTitle}</h1>
   <div class="grid">
-    <textarea id="md" placeholder="# Başlık\\n\\n- madde 1\\n- madde 2"></textarea>
+    <textarea id="md" placeholder="${t.templates.markdownPlaceholder.replace(/\n/g, "\\n")}"></textarea>
     <div id="out" class="out"></div>
   </div>
 </main>`);
@@ -221,7 +292,7 @@ function mdToHtml(src){
 const ta = document.getElementById('md');
 const out = document.getElementById('out');
 ta.addEventListener('input', ()=> out.innerHTML = mdToHtml(ta.value));
-ta.value = '# Hoş geldin\\n\\n- dene\\n- düzenle\\n\\n**kalın** ve *italik* desteklenir.';
+ta.value = ${JSON.stringify(t.templates.welcomeMd)};
 out.innerHTML = mdToHtml(ta.value);`);
   }
 
@@ -233,10 +304,8 @@ out.innerHTML = mdToHtml(ta.value);`);
             <Code2 className="h-4 w-4 text-primary" />
           </span>
           <div>
-            <h1 className="text-xl font-semibold tracking-tight">Kod Oyun Alanı</h1>
-            <p className="text-sm text-muted-foreground">
-              HTML, CSS ve JS yazarak canlı önizleme alın. Hızlı başlamak için aşağıdaki şablonları kullanın.
-            </p>
+            <h1 className="text-xl font-semibold tracking-tight">{t.title}</h1>
+            <p className="text-sm text-muted-foreground">{t.description}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -245,37 +314,37 @@ out.innerHTML = mdToHtml(ta.value);`);
             className="rounded-full border border-border/60 bg-background/70 px-3 py-1.5 text-sm hover:border-primary/40"
             aria-pressed={activeTemplate === 'todo'}
           >
-            Todo Uygulaması
+            {t.buttons.todo}
           </button>
           <button
             onClick={loadCounterTemplate}
             className="rounded-full border border-border/60 bg-background/70 px-3 py-1.5 text-sm hover:border-primary/40"
             aria-pressed={activeTemplate === 'counter'}
           >
-            Sayaç
+            {t.buttons.counter}
           </button>
           <button
             onClick={loadColorPickerTemplate}
             className="rounded-full border border-border/60 bg-background/70 px-3 py-1.5 text-sm hover:border-primary/40"
             aria-pressed={activeTemplate === 'color'}
           >
-            Renk Seçici
+            {t.buttons.color}
           </button>
           <button
             onClick={loadMarkdownTemplate}
             className="rounded-full border border-border/60 bg-background/70 px-3 py-1.5 text-sm hover:border-primary/40"
             aria-pressed={activeTemplate === 'markdown'}
           >
-            Markdown
+            {t.buttons.markdown}
           </button>
         </div>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
         <div className="space-y-4">
-          <EditorCard title="HTML" value={html} onChange={setHtml} language="html" />
-          <EditorCard title="CSS" value={css} onChange={setCss} language="css" />
-          <EditorCard title="JS" value={js} onChange={setJs} language="javascript" />
+          <EditorCard title={t.editors.html} value={html} onChange={setHtml} language="html" />
+          <EditorCard title={t.editors.css} value={css} onChange={setCss} language="css" />
+          <EditorCard title={t.editors.js} value={js} onChange={setJs} language="javascript" />
         </div>
 
         <div className="space-y-4">
@@ -283,7 +352,7 @@ out.innerHTML = mdToHtml(ta.value);`);
             <div className="flex items-center justify-between border-b border-border/60 px-4 py-2">
               <div className="flex items-center gap-2 text-sm font-medium">
                 <Eye className="h-4 w-4" />
-                Canlı Önizleme
+                {t.livePreview}
               </div>
             </div>
             <iframe
@@ -295,13 +364,11 @@ out.innerHTML = mdToHtml(ta.value);`);
           </div>
 
           <div className="rounded-2xl border border-border/60 bg-background/70 shadow-sm p-4">
-            <h2 className="text-sm font-semibold mb-2">Önerilen mini proje: Todo Uygulaması</h2>
+            <h2 className="text-sm font-semibold mb-2">{t.guideTitle}</h2>
             <ol className="list-decimal pl-5 text-sm space-y-1 text-muted-foreground">
-              <li>HTML’e bir form ve liste ekleyin (hazır şablonu kullanabilirsiniz).</li>
-              <li>Form gönderiminde girdiyi listeye ekleyin ve alanı temizleyin.</li>
-              <li>Her öğeye “tamamlandı” ve “sil” eylemleri ekleyin.</li>
-              <li>CSS ile kapsül butonlar ve yumuşak kenarlıklar kullanın.</li>
-              <li>İsteğe bağlı: localStorage ile listeyi kalıcı hale getirin.</li>
+              {t.guideSteps.map((step) => (
+                <li key={step}>{step}</li>
+              ))}
             </ol>
           </div>
         </div>
