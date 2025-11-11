@@ -5,7 +5,15 @@ export async function GET() {
   try {
     const { posts } = await getMediumPosts(5);
 
-    const formattedPosts = posts.map((post) => ({
+    type MediumPost = {
+      title: string;
+      link: string;
+      pubDate: string;
+      contentSnippet: string;
+      thumbnail: string | null;
+    };
+
+    const formattedPosts = posts.map((post: MediumPost) => ({
       title: post.title,
       description: post.contentSnippet,
       url: post.link,
