@@ -92,3 +92,13 @@ This project was developed using [Bolt.new](https://bolt.new), an AI-powered dev
 ## License
 
 MIT License - feel free to use this code for your own personal website!
+
+
+
+#yeni builde göndermek için 
+#git add . 
+#git commit -m "Update: playground-client ve sidebar düzenlendi, music klasörü eklendi"
+#git push origin main --force-with-lease
+
+
+#confligs olmamasına dikkat et 

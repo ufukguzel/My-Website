@@ -7,7 +7,7 @@ export const HighlightList: Highlight[] = [
         year: "2025",
         events: [
             {
-                title: "Valde - Senior Software Developer",
+                title: "Valde - Junıor Software Developer",
                 description: "Currently working as a senior software developer at Valde, helping product teams ship scalable web platforms with modern React, TypeScript and AI-assisted experiences.",
                 imageUrl: "/images/highlights/2025_dikont.jpg"
             }
