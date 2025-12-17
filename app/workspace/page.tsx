@@ -8,17 +8,17 @@ export const metadata = GetMetada('workspace');
 const workspaceHighlights = [
   {
     title: 'Focused productivity',
-    description: 'High-resolution displays and ergonomic gear keep long sessions comfortable.',
+    description: 'A clean setup built around my MacBook Pro and an external Dell display.',
     icon: <MonitorSmartphone className="h-5 w-5 text-primary" />,
   },
   {
     title: 'Multi-device flow',
-    description: 'Seamless switching between the Mac mini, portable display, and mobile accessories.',
+    description: 'Switch between macOS and Windows workflows with a MacBook + Dell machine.',
     icon: <Workflow className="h-5 w-5 text-primary" />,
   },
   {
     title: 'Creative playground',
-    description: 'A flexible workspace that supports coding, design, and mentoring work alike.',
+    description: 'A flexible space for coding, writing, and content creation.',
     icon: <Sparkles className="h-5 w-5 text-primary" />,
   },
 ];

@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { BookmarksList } from './bookmarks-list';
 import { Loader2 } from 'lucide-react';
 import { GetMetada } from '@/lib/page-metadata';
+import { RaindropEmbed } from './raindrop-embed';
 
 export const metadata = GetMetada("Ufuk'un Bookmarks Koleksiyonu");
 
@@ -18,7 +19,9 @@ export default function BookmarksPage() {
         </p>
       </div>
 
-      <Suspense
+      <RaindropEmbed />
+
+      {/* <Suspense
         fallback={
           <div className="flex items-center justify-center py-12 text-muted-foreground/60">
             <Loader2 className="h-6 w-6 animate-spin" />
@@ -26,7 +29,8 @@ export default function BookmarksPage() {
         }
       >
         <BookmarksList />
-      </Suspense>
+      </Suspense>*/}
+      
     </div>
   );
 }

@@ -8,7 +8,7 @@ import { Collection } from "@/types/collection";
 import { Bookmark } from "@/types/bookmark";
 import useSWR from "swr";
 
-const DEFAULT_COLLECTION_ID = 52929212; // Senin koleksiyon ID'in
+const DEFAULT_COLLECTION_ID = Number(process.env.NEXT_PUBLIC_RAINDROP_COLLECTION_ID || '0');
 
 async function fetcher(url: string) {
   const res = await fetch(url);
@@ -30,7 +30,13 @@ export function BookmarksList() {
 
   useEffect(() => {
     if (collections.length) {
-      setSelectedCollection(collections.find(c => c._id === DEFAULT_COLLECTION_ID) || collections[0]);
+      if (DEFAULT_COLLECTION_ID) {
+        setSelectedCollection(
+          collections.find((c) => c._id === DEFAULT_COLLECTION_ID) || collections[0]
+        );
+      } else {
+        setSelectedCollection(collections[0]);
+      }
     }
   }, [collections]);
 

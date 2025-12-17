@@ -29,11 +29,7 @@ My personal website built with Next.js and Tailwind CSS. Uses Medium as a headle
 
 1. Clone this repository:
 ```bash
-<<<<<<< HEAD
 git clone https://github.com/ufukguzel/my-web-site.git
-=======
-git clone https://github.com/ufukguzek/my-web-site.git
->>>>>>> 56d4270dbb0bbd4523448c056ed36b58f1a71cc4
 ```
 
 2. Install dependencies:
@@ -41,14 +37,16 @@ git clone https://github.com/ufukguzek/my-web-site.git
 npm install
 ```
 
-3. Create a `.env.local` file in the root directory:
+3. Create a `.env.local` file in the root directory (see `.env.example` for full list):
 ```bash
-# Raindrop.io API Token (Required for bookmarks)
-# Get your token from: https://app.raindrop.io/settings/integrations
-RAINDROP_ACCESS_TOKEN=214c6e2e-43b3-4332-b631-2ddfd60aa183
-# play.ai voice agent
-# Create your special agent from: https://play.ai/
-PLAYAI_API_KEY=your_key
+# Raindrop.io API Token (Settings → Integrations → Create app → Create test token)
+RAINDROP_ACCESS_TOKEN=your_raindrop_token
+# Optional: default collection ID shown in the UI
+NEXT_PUBLIC_RAINDROP_COLLECTION_ID=52929212
+
+# play.ai voice agent (https://play.ai/)
+PLAYAI_API_KEY=your_server_key
+NEXT_PUBLIC_PLAYAI_API_KEY=your_public_key
 ```
 
 4. Start the development server:
@@ -75,8 +73,8 @@ To customize this website for your own use, you'll need to modify the following:
 3. Configure Raindrop.io:
    - Create an account at [Raindrop.io](https://raindrop.io)
    - Go to [Integrations](https://app.raindrop.io/settings/integrations)
-   - Create a new app and generate a permanent token
-   - Add the token to `.env.local`
+   - Create a new app and generate a token (or test token)
+   - Set `RAINDROP_ACCESS_TOKEN` and (optionally) `NEXT_PUBLIC_RAINDROP_COLLECTION_ID`
 
 ## Development
 
@@ -94,11 +92,3 @@ This project was developed using [Bolt.new](https://bolt.new), an AI-powered dev
 MIT License - feel free to use this code for your own personal website!
 
 
-
-#yeni builde göndermek için 
-#git add . 
-#git commit -m "Update: playground-client ve sidebar düzenlendi, music klasörü eklendi"
-#git push origin main --force-with-lease
-
-
-#confligs olmamasına dikkat et 

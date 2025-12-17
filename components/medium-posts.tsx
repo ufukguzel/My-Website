@@ -17,7 +17,7 @@ interface MediumPost {
 
 const skeletonArray = Array.from({ length: 4 });
 
-export const MediumPosts = () => {
+export const MediumPosts = ({ query }: { query?: string } = {}) => {
   const [posts, setPosts] = useState<MediumPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -43,6 +43,15 @@ export const MediumPosts = () => {
 
     fetchPosts();
   }, []);
+
+  const filteredPosts = useMemo(() => {
+    const q = (query || "").trim().toLowerCase();
+    if (!q) return posts;
+    return posts.filter((post) => {
+      const hay = `${post.title} ${post.description}`.toLowerCase();
+      return hay.includes(q);
+    });
+  }, [posts, query]);
 
   const content = useMemo(() => {
     if (loading) {
@@ -82,9 +91,17 @@ export const MediumPosts = () => {
       );
     }
 
+    if (posts.length && !filteredPosts.length) {
+      return (
+        <div className="rounded-2xl border border-border/60 bg-background/70 p-10 text-center text-sm text-muted-foreground">
+          Aramanızla eşleşen yazı bulunamadı.
+        </div>
+      );
+    }
+
     return (
       <div className="grid gap-5 md:grid-cols-2">
-        {posts.map((post) => (
+        {filteredPosts.map((post) => (
           <Link
             key={post.url}
             href={post.url}
@@ -133,7 +150,7 @@ export const MediumPosts = () => {
         ))}
       </div>
     );
-  }, [error, loading, posts]);
+  }, [error, loading, posts, filteredPosts]);
 
   return content;
 };
