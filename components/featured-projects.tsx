@@ -1,7 +1,17 @@
+'use client';
+
+import { useRef } from 'react';
 import { ExternalLink, Github } from "lucide-react";
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import { FallbackImage } from "@/components/ui/fallback-image";
 import { ProjectList } from "@/lib/projects-data";
 import { type Project } from "@/types/project";
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger, useGSAP);
+}
 
 function AppStoreIcon() {
   return (
@@ -20,8 +30,39 @@ function PlayStoreIcon() {
 }
 
 function ProjectCard({ project }: { project: Project }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = cardRef.current;
+    if (!el) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const rect = el.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+    gsap.to(el, {
+      rotateY: px * 6,
+      rotateX: -py * 6,
+      transformPerspective: 900,
+      transformOrigin: 'center',
+      duration: 0.4,
+      ease: 'power2.out',
+    });
+  };
+
+  const handleMouseLeave = () => {
+    const el = cardRef.current;
+    if (!el) return;
+    gsap.to(el, { rotateX: 0, rotateY: 0, duration: 0.6, ease: 'power3.out' });
+  };
+
   return (
-    <div className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-background/80 via-background/70 to-background/80 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg">
+    <div
+      ref={cardRef}
+      data-anim="project-card"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-background/80 via-background/70 to-background/80 shadow-sm transition-shadow hover:border-primary/40 hover:shadow-lg [will-change:transform]"
+    >
       <div className="relative h-48 overflow-hidden border-b border-border/50">
         <div className="absolute inset-0 bg-muted/20" />
         <FallbackImage
@@ -91,9 +132,25 @@ function ProjectCard({ project }: { project: Project }) {
 
 export function FeaturedProjects({ limit = 4 }: { limit?: number }) {
   const featuredProjects = ProjectList.slice(0, limit);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      gsap.from('[data-anim="project-card"]', {
+        y: 40,
+        opacity: 0,
+        stagger: 0.12,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: gridRef.current, start: 'top 85%', once: true },
+      });
+    },
+    { scope: gridRef },
+  );
 
   return (
-    <div className="grid gap-6 md:grid-cols-2">
+    <div ref={gridRef} className="grid gap-6 md:grid-cols-2">
       {featuredProjects.map((project) => (
         <ProjectCard key={project.title} project={project} />
       ))}
