@@ -8,7 +8,6 @@ import { LoadingProvider } from '@/components/loading-provider';
 import { OkAsciiArt } from '@/components/ok-ascii-art';
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { PlayAIWidget } from '@/components/playai-widget';
 import { GetMetada } from '@/lib/page-metadata';
 import { MouseGradientBackground } from '@/components/mouse-gradient-background';
 import { LanguageProvider } from '@/components/language-provider';
@@ -85,8 +84,7 @@ export default function RootLayout({
               </div>
             </div>
           </div>
-          <PlayAIWidget />
-          </LanguageProvider>
+</LanguageProvider>
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />

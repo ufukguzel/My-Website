@@ -5,7 +5,7 @@ import { BriefcaseBusiness, Github, Linkedin, Mail, Sparkles } from 'lucide-reac
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import PlayAIEmbed from '@/components/playai-embed';
+import { AiChat } from '@/components/ai-chat';
 import { MediumPosts } from '@/components/medium-posts';
 import { FeaturedProjects } from '@/components/featured-projects';
 import { useLanguage } from '@/components/language-provider';
@@ -183,7 +183,7 @@ export default function HomeContent() {
       <section className="space-y-4">
         <h2 data-anim="section-heading" className="text-xl font-semibold tracking-tight">{t.chatHeading}</h2>
         <div className="flex justify-center">
-          <PlayAIEmbed />
+          <AiChat />
         </div>
       </section>
 
