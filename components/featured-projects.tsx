@@ -136,15 +136,22 @@ export function FeaturedProjects({ limit = 4 }: { limit?: number }) {
 
   useGSAP(
     () => {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      gsap.from('[data-anim="project-card"]', {
-        y: 40,
-        opacity: 0,
-        stagger: 0.12,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: gridRef.current, start: 'top 85%', once: true },
-      });
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        gsap.set('[data-anim="project-card"]', { opacity: 1 });
+        return;
+      }
+      gsap.fromTo(
+        '[data-anim="project-card"]',
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.12,
+          duration: 0.8,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: gridRef.current, start: 'top 90%', once: true },
+        },
+      );
     },
     { scope: gridRef },
   );

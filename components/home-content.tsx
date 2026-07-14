@@ -30,43 +30,58 @@ export default function HomeContent() {
   useGSAP(
     () => {
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reduce) return;
+      if (reduce) {
+        gsap.set('[data-anim], [data-anim="hero-cta"] > *, [data-anim="hero-side"] > *', { opacity: 1 });
+        return;
+      }
 
       const heroTl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 0.9 } });
       heroTl
-        .from('[data-anim="hero-badge"]', { y: 24, opacity: 0, duration: 0.6 })
-        .from('[data-anim="hero-title"]', { y: 40, opacity: 0 }, '-=0.3')
-        .from('[data-anim="hero-desc"]', { y: 24, opacity: 0 }, '-=0.5')
-        .from('[data-anim="hero-cta"] > *', { y: 20, opacity: 0, stagger: 0.08 }, '-=0.5')
-        .from('[data-anim="hero-side"] > *', { x: 40, opacity: 0, stagger: 0.12 }, '-=0.7');
+        .fromTo('[data-anim="hero-badge"]', { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 })
+        .fromTo('[data-anim="hero-title"]', { y: 40, opacity: 0 }, { y: 0, opacity: 1 }, '-=0.3')
+        .fromTo('[data-anim="hero-desc"]', { y: 24, opacity: 0 }, { y: 0, opacity: 1 }, '-=0.5')
+        .fromTo('[data-anim="hero-cta"] > *', { y: 20, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.08 }, '-=0.5')
+        .fromTo('[data-anim="hero-side"] > *', { x: 40, opacity: 0 }, { x: 0, opacity: 1, stagger: 0.12 }, '-=0.7');
 
       gsap.utils.toArray<HTMLElement>('[data-anim="section-heading"]').forEach((el) => {
-        gsap.from(el, {
-          y: 30,
-          opacity: 0,
-          duration: 0.8,
+        gsap.fromTo(
+          el,
+          { y: 30, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: { trigger: el, start: 'top 90%', once: true },
+          },
+        );
+      });
+
+      gsap.fromTo(
+        '[data-anim="tag"]',
+        { y: 12, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.04,
+          duration: 0.5,
           ease: 'power2.out',
-          scrollTrigger: { trigger: el, start: 'top 85%', once: true },
-        });
-      });
+          scrollTrigger: { trigger: '[data-anim="tags-wrap"]', start: 'top 90%', once: true },
+        },
+      );
 
-      gsap.from('[data-anim="tag"]', {
-        y: 12,
-        opacity: 0,
-        stagger: 0.04,
-        duration: 0.5,
-        ease: 'power2.out',
-        scrollTrigger: { trigger: '[data-anim="tags-wrap"]', start: 'top 85%', once: true },
-      });
-
-      gsap.from('[data-anim="focus-card"]', {
-        y: 30,
-        opacity: 0,
-        stagger: 0.12,
-        duration: 0.7,
-        ease: 'power2.out',
-        scrollTrigger: { trigger: '[data-anim="focus-grid"]', start: 'top 85%', once: true },
-      });
+      gsap.fromTo(
+        '[data-anim="focus-card"]',
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.12,
+          duration: 0.7,
+          ease: 'power2.out',
+          scrollTrigger: { trigger: '[data-anim="focus-grid"]', start: 'top 90%', once: true },
+        },
+      );
     },
     { scope: rootRef, dependencies: [language] },
   );

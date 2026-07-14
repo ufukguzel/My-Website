@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { MediumPosts } from "@/components/medium-posts";
+import { AnimatedPage } from "@/components/animated-page";
 
 export default function BlogClient() {
   const [query, setQuery] = useState("");
@@ -9,8 +10,8 @@ export default function BlogClient() {
   const normalizedQuery = useMemo(() => query.trim(), [query]);
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+    <AnimatedPage className="space-y-6">
+      <div data-reveal className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="space-y-1">
           <h1 className="text-4xl font-bold">Blog Posts</h1>
           <p className="text-sm text-muted-foreground">
@@ -29,8 +30,10 @@ export default function BlogClient() {
         </div>
       </div>
 
-      <MediumPosts query={normalizedQuery} />
-    </div>
+      <div data-reveal>
+        <MediumPosts query={normalizedQuery} />
+      </div>
+    </AnimatedPage>
   );
 }
 
