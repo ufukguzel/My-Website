@@ -1,6 +1,7 @@
 import { ProjectList } from "@/lib/projects-data";
 import { ProjectCard } from "@/components/project-card";
 import { GetMetada } from '@/lib/page-metadata';
+import { AnimatedPage } from '@/components/animated-page';
 import { Box, Layers, Ribbon } from 'lucide-react';
 
 export const metadata = GetMetada('projects');
@@ -25,8 +26,8 @@ const summaryStats = [
 
 export default function ProjectsPage() {
   return (
-    <div className="relative space-y-16">
-      <section className="relative overflow-hidden rounded-3xl border border-border/60 bg-background/70 p-8 md:p-12 shadow-xl backdrop-blur">
+    <AnimatedPage className="relative space-y-16">
+      <section data-reveal className="relative overflow-hidden rounded-3xl border border-border/60 bg-background/70 p-8 md:p-12 shadow-xl backdrop-blur">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(59,130,246,0.12),_transparent_55%)]" aria-hidden />
         <div className="relative space-y-8">
           <div className="space-y-4">
@@ -47,6 +48,7 @@ export default function ProjectsPage() {
             {summaryStats.map((item) => (
               <div
                 key={item.title}
+                data-reveal
                 className="flex flex-col gap-3 rounded-2xl border border-border/60 bg-background/80 p-5 shadow-sm transition hover:border-primary/40 hover:shadow-md"
               >
                 <div className="flex items-center gap-3 text-sm font-semibold text-foreground">
@@ -65,7 +67,7 @@ export default function ProjectsPage() {
       </section>
 
       <section className="space-y-6">
-        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <div data-reveal className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div>
             <h2 className="text-2xl font-semibold tracking-tight">Projects</h2>
             <p className="text-sm text-muted-foreground">
@@ -82,10 +84,12 @@ export default function ProjectsPage() {
 
         <div className="grid gap-6 md:grid-cols-2">
           {ProjectList.map((project) => (
-            <ProjectCard key={project.title} project={project} />
+            <div key={project.title} data-reveal className="h-full">
+              <ProjectCard project={project} />
+            </div>
           ))}
         </div>
       </section>
-    </div>
+    </AnimatedPage>
   );
 }

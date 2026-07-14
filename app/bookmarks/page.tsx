@@ -2,14 +2,15 @@ import { Suspense } from 'react';
 import { BookmarksList } from './bookmarks-list';
 import { Loader2 } from 'lucide-react';
 import { GetMetada } from '@/lib/page-metadata';
+import { AnimatedPage } from '@/components/animated-page';
 import { RaindropEmbed } from './raindrop-embed';
 
 export const metadata = GetMetada("Ufuk'un Bookmarks Koleksiyonu");
 
 export default function BookmarksPage() {
   return (
-    <div className="space-y-8">
-      <div className="space-y-2">
+    <AnimatedPage className="space-y-8">
+      <div data-reveal className="space-y-2">
         <h1 className="text-3xl font-bold">Bookmarks</h1>
         <p className="text-muted-foreground">
         Here, I record the links, documents, github warehouses and tweets that I find useful while browsing the Internet.
@@ -19,7 +20,9 @@ export default function BookmarksPage() {
         </p>
       </div>
 
-      <RaindropEmbed />
+      <div data-reveal>
+        <RaindropEmbed />
+      </div>
 
       {/* <Suspense
         fallback={
@@ -30,7 +33,7 @@ export default function BookmarksPage() {
       >
         <BookmarksList />
       </Suspense>*/}
-      
-    </div>
+
+    </AnimatedPage>
   );
 }
