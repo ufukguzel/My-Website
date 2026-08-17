@@ -1,14 +1,15 @@
 import { ImageDialog } from '@/components/ui/image-dialog';
 import { HighlightList } from '@/lib/highlights-data';
 import { GetMetada } from '@/lib/page-metadata';
+import { AnimatedPage } from '@/components/animated-page';
 import { CalendarDays, Sparkles, Trophy } from 'lucide-react';
 
 export const metadata = GetMetada('highlights');
 
 export default function HighlightPage() {
   return (
-    <div className="relative space-y-14">
-      <section className="relative overflow-hidden rounded-3xl border border-border/60 bg-background/70 p-8 shadow-xl backdrop-blur">
+    <AnimatedPage className="relative space-y-14">
+      <section data-reveal className="relative overflow-hidden rounded-3xl border border-border/60 bg-background/70 p-8 shadow-xl backdrop-blur">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.12),_transparent_55%)]" aria-hidden />
         <div className="relative space-y-6">
           <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1 text-sm font-medium text-primary">
@@ -44,7 +45,7 @@ export default function HighlightPage() {
               key={item.year}
               className="relative grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] md:items-start"
             >
-              <div className={`relative flex flex-col gap-3 rounded-2xl border border-border/60 bg-background/70 p-6 shadow-sm ${index % 2 === 1 ? 'md:order-2' : ''}`}>
+              <div data-reveal className={`relative flex flex-col gap-3 rounded-2xl border border-border/60 bg-background/70 p-6 shadow-sm ${index % 2 === 1 ? 'md:order-2' : ''}`}>
                 <span className="text-sm font-semibold uppercase tracking-wide text-primary/80">
                   {item.year}
                 </span>
@@ -57,6 +58,7 @@ export default function HighlightPage() {
                 {item.events.map((event, eventIndex) => (
                   <div
                     key={`${item.year}-${eventIndex}`}
+                    data-reveal
                     className="group relative overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-background/85 via-background/70 to-background/80 p-6 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
                   >
                     <div className="absolute left-0 top-6 h-12 w-1 rounded-full bg-primary/40 md:-left-12" aria-hidden />
@@ -82,6 +84,6 @@ export default function HighlightPage() {
           ))}
         </div>
       </section>
-    </div>
+    </AnimatedPage>
   );
 }

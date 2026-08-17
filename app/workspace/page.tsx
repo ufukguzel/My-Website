@@ -1,6 +1,7 @@
 import { FallbackImage } from "@/components/ui/fallback-image";
 import { WorkspaceIcons, WorkspaceData } from "@/lib/workspace-data";
 import { GetMetada } from '@/lib/page-metadata';
+import { AnimatedPage } from '@/components/animated-page';
 import { MonitorSmartphone, Sparkles, Workflow } from 'lucide-react';
 
 export const metadata = GetMetada('workspace');
@@ -25,8 +26,8 @@ const workspaceHighlights = [
 
 export default function WorkspacePage() {
   return (
-    <div className="relative space-y-16">
-      <section className="relative overflow-hidden rounded-3xl border border-border/60 bg-background/70 p-8 md:p-12 shadow-xl backdrop-blur">
+    <AnimatedPage className="relative space-y-16">
+      <section data-reveal className="relative overflow-hidden rounded-3xl border border-border/60 bg-background/70 p-8 md:p-12 shadow-xl backdrop-blur">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.12),_transparent_55%)]" aria-hidden />
         <div className="relative space-y-7">
           <div className="space-y-4">
@@ -47,6 +48,7 @@ export default function WorkspacePage() {
             {workspaceHighlights.map((item) => (
               <div
                 key={item.title}
+                data-reveal
                 className="flex flex-col gap-3 rounded-2xl border border-border/60 bg-background/80 p-5 shadow-sm transition hover:border-primary/40 hover:shadow-md"
               >
                 <div className="flex items-center gap-3 text-sm font-semibold text-foreground">
@@ -70,7 +72,7 @@ export default function WorkspacePage() {
 
           return (
             <div key={category} className="space-y-8">
-              <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+              <div data-reveal className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
                 <div className="flex items-center gap-3">
                   <span className="flex h-11 w-11 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-primary">
                     <Icon className="h-5 w-5" />
@@ -92,6 +94,7 @@ export default function WorkspacePage() {
                 {items.map((item) => (
                   <div
                     key={item.name}
+                    data-reveal
                     className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-background/85 via-background/75 to-background/80 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
                   >
                     <div className="relative aspect-[4/3] overflow-hidden border-b border-border/50">
@@ -125,6 +128,6 @@ export default function WorkspacePage() {
           );
         })}
       </section>
-    </div>
+    </AnimatedPage>
   );
 }

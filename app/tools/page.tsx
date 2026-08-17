@@ -1,5 +1,6 @@
 import { GetMetada } from '@/lib/page-metadata';
 import { ToolsData } from '@/lib/tools-data';
+import { AnimatedPage } from '@/components/animated-page';
 import { SquareMousePointer, Sparkles, Workflow } from 'lucide-react';
 
 export const metadata = GetMetada('tools');
@@ -24,8 +25,8 @@ const heroHighlights = [
 
 export default function ToolsPage() {
   return (
-    <div className="relative space-y-16">
-      <section className="relative overflow-hidden rounded-3xl border border-border/60 bg-background/70 p-8 md:p-12 shadow-xl backdrop-blur">
+    <AnimatedPage className="relative space-y-16">
+      <section data-reveal className="relative overflow-hidden rounded-3xl border border-border/60 bg-background/70 p-8 md:p-12 shadow-xl backdrop-blur">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(59,130,246,0.1),_transparent_60%)]" aria-hidden />
         <div className="relative space-y-7">
           <div className="space-y-4">
@@ -46,6 +47,7 @@ export default function ToolsPage() {
             {heroHighlights.map((item) => (
               <div
                 key={item.title}
+                data-reveal
                 className="flex flex-col gap-3 rounded-2xl border border-border/60 bg-background/80 p-5 shadow-sm transition hover:border-primary/40 hover:shadow-md"
               >
                 <div className="flex items-center gap-3 text-sm font-semibold text-foreground">
@@ -64,7 +66,7 @@ export default function ToolsPage() {
       </section>
 
       <section className="space-y-8">
-        <div className="space-y-3">
+        <div data-reveal className="space-y-3">
           <h2 className="text-2xl font-semibold tracking-tight">Tools by category</h2>
           <p className="text-sm text-muted-foreground">
             Development, design, and workflow essentials I rely on—each supported with living notes and documentation.
@@ -75,6 +77,7 @@ export default function ToolsPage() {
           {ToolsData.map(({ category, icon: Icon, items }) => (
             <div
               key={category}
+              data-reveal
               className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-background/85 via-background/75 to-background/80 p-6 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
             >
               <div className="flex items-center gap-3 border-b border-border/40 pb-5">
@@ -103,6 +106,6 @@ export default function ToolsPage() {
           ))}
         </div>
       </section>
-    </div>
+    </AnimatedPage>
   );
 }

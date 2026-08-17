@@ -56,8 +56,8 @@ export const PageMetadataList: Record<string, PageMetadata> = {
     },
     mobileApps: {
         route: "/mobile-apps",
-        title: "Mobile Apps",
-        description: "A selection of mobile applications I have published.",
+        title: "Apps for Sale",
+        description: "Mobile apps I've built — make an offer to acquire one, or pitch me your app idea.",
         image: {
             url: '/api/og?page=mobile-apps',
             width: 1200,

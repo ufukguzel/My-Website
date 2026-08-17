@@ -80,3 +80,58 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Pre-hide GSAP animation targets to prevent FOUC before hydration.
+   gsap.from() will keep them at opacity 0 and animate to 1.
+   <html> ships with class="no-js"; an inline script in layout.tsx removes it
+   as soon as JS runs. If JS never runs, the html.no-js rule below keeps
+   everything visible. */
+[data-anim="hero-badge"],
+[data-anim="hero-title"],
+[data-anim="hero-desc"],
+[data-anim="hero-cta"] > *,
+[data-anim="hero-side"] > *,
+[data-anim="section-heading"],
+[data-anim="tag"],
+[data-anim="focus-card"],
+[data-anim="project-card"],
+[data-anim="apps-header"],
+[data-anim="app-card"],
+[data-anim="apps-panel"],
+[data-reveal] {
+  opacity: 0;
+}
+
+html.no-js [data-anim="hero-badge"],
+html.no-js [data-anim="hero-title"],
+html.no-js [data-anim="hero-desc"],
+html.no-js [data-anim="hero-cta"] > *,
+html.no-js [data-anim="hero-side"] > *,
+html.no-js [data-anim="section-heading"],
+html.no-js [data-anim="tag"],
+html.no-js [data-anim="focus-card"],
+html.no-js [data-anim="project-card"],
+html.no-js [data-anim="apps-header"],
+html.no-js [data-anim="app-card"],
+html.no-js [data-anim="apps-panel"],
+html.no-js [data-reveal] {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-anim="hero-badge"],
+  [data-anim="hero-title"],
+  [data-anim="hero-desc"],
+  [data-anim="hero-cta"] > *,
+  [data-anim="hero-side"] > *,
+  [data-anim="section-heading"],
+  [data-anim="tag"],
+  [data-anim="focus-card"],
+  [data-anim="project-card"],
+  [data-anim="apps-header"],
+  [data-anim="app-card"],
+  [data-anim="apps-panel"],
+  [data-reveal] {
+    opacity: 1;
+  }
+}

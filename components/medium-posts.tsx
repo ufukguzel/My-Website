@@ -1,13 +1,19 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { format } from 'date-fns';
 import { tr } from 'date-fns/locale';
 import { ArrowUpRight } from 'lucide-react';
 import { FallbackImage } from '@/components/ui/fallback-image';
 import { useLanguage } from '@/components/language-provider';
 import { blogTranslations } from '@/lib/i18n/blog-content';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(useGSAP);
+}
 
 interface MediumPost {
   title: string;
@@ -25,6 +31,23 @@ export const MediumPosts = ({ query }: { query?: string } = {}) => {
   const [posts, setPosts] = useState<MediumPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Yazılar asenkron geldiği için kart animasyonu yükleme bitince tetiklenir.
+  useGSAP(
+    () => {
+      if (loading) return;
+      const cards = containerRef.current?.querySelectorAll('[data-post-card]');
+      if (!cards?.length) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      gsap.fromTo(
+        cards,
+        { y: 28, opacity: 0 },
+        { y: 0, opacity: 1, stagger: 0.08, duration: 0.6, ease: 'power3.out', overwrite: true },
+      );
+    },
+    { scope: containerRef, dependencies: [loading] },
+  );
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -109,6 +132,7 @@ export const MediumPosts = ({ query }: { query?: string } = {}) => {
           <Link
             key={post.url}
             href={post.url}
+            data-post-card
             target="_blank"
             rel="noopener noreferrer"
             className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-background/80 via-background/70 to-background/80 p-6 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
@@ -158,5 +182,5 @@ export const MediumPosts = ({ query }: { query?: string } = {}) => {
     );
   }, [hasError, loading, posts, filteredPosts, t, language]);
 
-  return content;
+  return <div ref={containerRef}>{content}</div>;
 };
