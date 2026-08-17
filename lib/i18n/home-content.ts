@@ -40,7 +40,7 @@ export const homeTranslations: Record<
     workHeading: 'How I work',
     workDescription:
       'I create end-to-end solutions across design systems, front-end architectures, and AI integrations. Partnering closely with product teams, I make data-informed decisions and continuously refine the user experience.',
-    chatHeading: 'Chat with PlayAI',
+    chatHeading: 'Ask my AI assistant',
     latestPostsHeading: 'Latest posts',
     featuredProjectsHeading: 'Featured projects',
     viewAllLabel: 'View all →',
@@ -68,7 +68,7 @@ export const homeTranslations: Record<
     workHeading: 'Nasıl çalışıyorum',
     workDescription:
       'Tasarım sistemlerinden ön uç mimarilerine ve yapay zekâ entegrasyonlarına kadar uçtan uca çözümler geliştiriyorum. Ürün ekipleriyle yakın çalışarak veriye dayalı kararlar alıyor ve kullanıcı deneyimini sürekli iyileştiriyorum.',
-    chatHeading: 'PlayAI ile sohbet et',
+    chatHeading: 'Yapay zekâ asistanıma sor',
     latestPostsHeading: 'Son yazılar',
     featuredProjectsHeading: 'Öne çıkan projeler',
     viewAllLabel: 'Tümünü gör →',

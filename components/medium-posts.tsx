@@ -8,6 +8,8 @@ import { format } from 'date-fns';
 import { tr } from 'date-fns/locale';
 import { ArrowUpRight } from 'lucide-react';
 import { FallbackImage } from '@/components/ui/fallback-image';
+import { useLanguage } from '@/components/language-provider';
+import { blogTranslations } from '@/lib/i18n/blog-content';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(useGSAP);
@@ -24,9 +26,11 @@ interface MediumPost {
 const skeletonArray = Array.from({ length: 4 });
 
 export const MediumPosts = ({ query }: { query?: string } = {}) => {
+  const { language } = useLanguage();
+  const t = blogTranslations[language];
   const [posts, setPosts] = useState<MediumPost[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [hasError, setHasError] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Yazılar asenkron geldiği için kart animasyonu yükleme bitince tetiklenir.
@@ -57,7 +61,7 @@ export const MediumPosts = ({ query }: { query?: string } = {}) => {
         const data = await response.json();
         setPosts(data);
       } catch (err) {
-        setError('An error occurred while loading Medium posts');
+        setHasError(true);
         console.error('Medium post error:', err);
       } finally {
         setLoading(false);
@@ -98,10 +102,10 @@ export const MediumPosts = ({ query }: { query?: string } = {}) => {
       );
     }
 
-    if (error) {
+    if (hasError) {
       return (
         <div className="rounded-2xl border border-destructive/30 bg-destructive/10 p-6 text-sm text-destructive">
-          {error}
+          {t.loadError}
         </div>
       );
     }
@@ -109,7 +113,7 @@ export const MediumPosts = ({ query }: { query?: string } = {}) => {
     if (!posts.length) {
       return (
         <div className="rounded-2xl border border-border/60 bg-background/70 p-10 text-center text-sm text-muted-foreground">
-          There are no published Medium posts at the moment. I’ll add new content soon.
+          {t.noPosts}
         </div>
       );
     }
@@ -117,7 +121,7 @@ export const MediumPosts = ({ query }: { query?: string } = {}) => {
     if (posts.length && !filteredPosts.length) {
       return (
         <div className="rounded-2xl border border-border/60 bg-background/70 p-10 text-center text-sm text-muted-foreground">
-          Aramanızla eşleşen yazı bulunamadı.
+          {t.noSearchResults}
         </div>
       );
     }
@@ -145,7 +149,7 @@ export const MediumPosts = ({ query }: { query?: string } = {}) => {
                 />
               ) : (
                 <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
-                  No image available
+                  {t.noImage}
                 </div>
               )}
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
@@ -156,7 +160,9 @@ export const MediumPosts = ({ query }: { query?: string } = {}) => {
                   <span className="rounded-full bg-primary/10 px-3 py-1 text-primary">
                     Medium
                   </span>
-                  <time>{format(new Date(post.publishedAt), 'd MMMM yyyy', { locale: tr })}</time>
+                  <time>
+                    {format(new Date(post.publishedAt), 'd MMMM yyyy', language === 'tr' ? { locale: tr } : undefined)}
+                  </time>
                 </div>
                 <h3 className="text-lg font-semibold leading-snug tracking-tight text-foreground group-hover:text-primary">
                   {post.title}
@@ -166,7 +172,7 @@ export const MediumPosts = ({ query }: { query?: string } = {}) => {
                 </p>
               </div>
               <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary transition group-hover:gap-3">
-                Read article
+                {t.readArticle}
                 <ArrowUpRight className="h-4 w-4" />
               </span>
             </div>
@@ -174,7 +180,7 @@ export const MediumPosts = ({ query }: { query?: string } = {}) => {
         ))}
       </div>
     );
-  }, [error, loading, posts, filteredPosts]);
+  }, [hasError, loading, posts, filteredPosts, t, language]);
 
   return <div ref={containerRef}>{content}</div>;
 };
