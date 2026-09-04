@@ -37,7 +37,7 @@ export const ProjectList: Project[] = [
     sourceUrl: "https://github.com/ufukguzel/Is-Takip-Sistemi"
   },
   {
-    title: "Tarife Asistanı (Recipe Assistant)",
+    title: "Tarif Asistanı (Recipe Assistant)",
     description: "A mobile app that suggests recipes from the ingredients you have, powered by an AI language model (Cohere). Built with React Native and Expo, with favorites and step-by-step recipe details.",
     image: `${imageFolderPath}/yemek-tarif-asistani.jpg`,
     demoUrl: "#",
