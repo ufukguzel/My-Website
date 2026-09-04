@@ -50,4 +50,32 @@ export const ProjectList: Project[] = [
     demoUrl: "#",
     sourceUrl: "https://github.com/ufukguzel/Hastane-Otomasyon"
   },
+  {
+    title: "Öğrenci Bilgi Sistemi (Medipol University)",
+    description: "A web-based student information system built with ASP.NET Core (Razor Pages) and Entity Framework Core. Manages students, courses and enrollments over a code-first SQL Server database.",
+    image: `${imageFolderPath}/medipol.jpg`,
+    demoUrl: "#",
+    sourceUrl: "https://github.com/ufukguzel/MedipolUniversity"
+  },
+  {
+    title: "Video Günlüğü (Video Diary)",
+    description: "A mobile video journaling app built with React Native and Expo — record, trim and edit videos with metadata management for a modern journaling experience.",
+    image: `${imageFolderPath}/video-diary.jpg`,
+    demoUrl: "#",
+    sourceUrl: "https://github.com/ufukguzel/React-Video-Diary-App"
+  },
+  {
+    title: "TabuAI — AI Taboo Game",
+    description: "An AI-powered Taboo word game where a language model (Gemini) generates and evaluates cards. Built with React and TypeScript.",
+    image: `${imageFolderPath}/tabu-ai.jpg`,
+    demoUrl: "#",
+    sourceUrl: "https://github.com/ufukguzel/TabuAi"
+  },
+  {
+    title: "Toplantı Odası Rezervasyon (Meeting Room Booking)",
+    description: "A real-time meeting room reservation app built with Firebase (Realtime Database) and React — book rooms by date and hourly slots with live sync across users.",
+    image: `${imageFolderPath}/toplanti-oda.jpg`,
+    demoUrl: "#",
+    sourceUrl: "https://github.com/ufukguzel/toplant-oda"
+  },
 ];

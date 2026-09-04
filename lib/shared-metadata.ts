@@ -26,13 +26,13 @@ const _socialAccounts = {
   x: 'ufukkguzel',
   medium: 'ufukkguzel',
   linkedin: 'ufukguzel',
-  github: 'ufukguzel58'
+  github: 'ufukguzel'
 };
 
 const _urls = {
   website: 'https://ufukguzel.com',
-  playStore: 'https://play.google.com/store/apps/dev?id=5499115100085978154',
-  appStore: 'https://apps.apple.com/us/developer/osman-koc/id1729993108',
+  playStore: 'https://ufukguzel.com',
+  appStore: 'https://ufukguzel.com',
   gravatarImg: 'https://gravatar.com/avatar/8cdcd03a8317d08a507265de2fef0c73?s=96&d=mp',
 };
 
