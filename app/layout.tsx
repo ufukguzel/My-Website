@@ -47,7 +47,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Person",
               "name": "Ufuk Güzel",
-              "url": "https://ufukguzel.com.tr",
+              "url": "https://ufukguzel.com",
               "sameAs": [
                 "https://www.linkedin.com/in/ufukguzel/",
                 "https://github.com/ufukguzel"

@@ -19,7 +19,7 @@ const _keywords = [
   'blog',
   'mask'
 ];
-const _email = 'me@ufukguzel.com.tr';
+const _email = 'me@ufukguzel.com';
 //const _ogImgPath = '/og-image.png';
 
 const _socialAccounts = {

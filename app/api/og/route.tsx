@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
     const height = 630;
 
     const pageTitle = title ?? page ?? '< hop />';
-    const pageUrl = url ?? 'https://ufukguzel.com.tr/';
+    const pageUrl = url ?? 'https://ufukguzel.com/';
     const pageDesc = PageMetadataList[page ?? ''].description;
 
     return new ImageResponse(

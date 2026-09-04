@@ -24,10 +24,10 @@ export const ProjectList: Project[] = [
   },
   {
     title: "Personal Website",
-    description: "ufukguzel.com.tr - Built with Next.js, TypeScript, and Tailwind CSS",
+    description: "ufukguzel.com - Built with Next.js, TypeScript, and Tailwind CSS",
     image: `${imageFolderPath}/ufuk-website.jpg`,
-    demoUrl: "https://ufukguzel.com.tr",
-    sourceUrl: "https://github.com/ufukguzel/ufukguzel.com.tr"
+    demoUrl: "https://ufukguzel.com",
+    sourceUrl: "https://github.com/ufukguzel/My-Website"
   },
   {
     title: "İş Takip Sistemi (Task Management System)",

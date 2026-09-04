@@ -106,7 +106,7 @@ export default function HomeContent() {
             </div>
             <div data-anim="hero-cta" className="flex flex-wrap items-center gap-3">
               <a
-                href="mailto:me@ufukguzel.com.tr"
+                href="mailto:me@ufukguzel.com"
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition hover:scale-[1.02] hover:shadow-lg"
               >
                 <Mail size={18} />
