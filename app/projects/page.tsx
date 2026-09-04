@@ -75,7 +75,7 @@ export default function ProjectsPage() {
             </p>
           </div>
           <a
-            href="mailto:me@ufukguzel.com"
+            href="mailto:ufuk@ufukguzel.com"
             className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/70 px-4 py-2 text-sm font-medium text-foreground transition hover:border-primary/40 hover:text-primary"
           >
             Let’s discuss a project
